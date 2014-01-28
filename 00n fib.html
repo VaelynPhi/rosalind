@@ -1,0 +1,20 @@
+<html><head><script type="text/ecmascript" src="/libs/jquery.js"></script><script type="text/ecmascript">
+
+var rabbits = [ 1, 1 ];
+
+function generations(n,k){
+	n-=2;
+	while(n--){
+		rabbits.push( 1*rabbits.slice(-1) + 1*( k * rabbits.slice(-2,-1) ) );
+	}
+}
+
+$(function(){
+	generations(33,4);
+	$("#results").html( rabbits.join(" ") );
+//	var res = seq.split("").sort();
+//	$("#results").html(res);
+});
+
+
+</script></head><body><pre id="results"></pre></body></html>
