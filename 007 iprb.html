@@ -1,0 +1,39 @@
+<html><head><script type="text/ecmascript" src="/libs/jquery.js"></script><script type="text/ecmascript">
+
+function hasDominant(p){
+	var total = p.reduce(function(previousValue, currentValue, index, array){
+		return previousValue + currentValue;
+	});
+	$("#results").append( "Total: "+ total +"\n" );
+
+	var domp = 0
+	+( ( (p[0]>0) && ( p[0]>1 || p[1]>0 || p[2]>0 ) ) ?
+		(p[0]/total)
+	: 0 )
+	+( ( (p[1]>0) && (p[0]>0) ) ?
+		( (p[1]/total) * ((p[0])/(total-1)) )
+	: 0 )
+	+( (p[1]>1) ?
+		.75 * ( (p[1]/total) * ((p[1]-1)/(total-1)) )
+	: 0 )
+	+( ( (p[1]>0) && (p[2]>0) ) ?
+		.5 * ( (p[1]/total) * ((p[2])/(total-1)) )
+	: 0 )
+	+( ( (p[2]>0) && (p[0]>0) ) ?
+		( (p[2]/total) * ((p[0])/(total-1)) )
+	: 0 )
+	+( ( (p[2]>0) && (p[1]>0) ) ?
+		.5 * ( (p[2]/total) * ((p[1])/(total-1)) )
+	: 0 );
+
+	$("#results").append( "Final Probability: "+ domp +"\n" );
+
+	return domp;
+}
+
+$(function(){
+	$("#results").append( "\nProbability of dominant phenotype: "+ hasDominant([ 21, 18, 28 ]) +"\n" );
+});
+
+
+</script></head><body><pre id="results"></pre></body></html>

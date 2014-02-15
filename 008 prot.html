@@ -1,0 +1,23 @@
+<html><head><style type="text/css">
+.hidden { display: none; }
+</style>
+<script type="text/ecmascript" src="/libs/jquery.js"></script>
+<script type="text/ecmascript" src="./008 prot.js"></script>
+<script type="text/ecmascript">
+
+
+
+$(function(){
+	var s = $("#input").text().trim().split("");
+	var proteins = [];
+	while( s.length > 3 ){
+		var codon = s.splice(0,3).join("");
+		if( rnamap[codon] ) proteins.push( rnamap[codon] );
+	}
+	$("#results").append( proteins.join("") );
+});
+
+
+</script></head><body><pre id="info"></pre><pre id="results"></pre><pre id="input" class="hidden">
+AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA
+</pre></body></html>

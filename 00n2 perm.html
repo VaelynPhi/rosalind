@@ -1,0 +1,42 @@
+<html><head><style type="text/css">
+.hidden { display: none; }
+</style><script type="text/ecmascript" src="/libs/jquery.js"></script><script type="text/ecmascript">
+
+function permute(u){
+	if(!$.isArray(u)){ return false; }
+	else if(u.length == 0){ return u; }
+	else if(u.length == 1){ return [u]; }
+	else {
+		return $.map(u,function(av,ai,au){
+			var bu = au.slice();
+			bu.splice(ai,1);
+			var bp = permute(bu);
+			$.each(bp, function(ci,cv){
+				cv.unshift(av);
+			});
+			return bp;
+		}, u);
+	}
+}
+
+$(function(){
+
+	// var l = 3;
+	// var i=0;
+	var g = [1,2,3,4];
+	// while(i++<l){
+	// 	g.push(i);
+	// }
+	var res = permute(g); //, "#results");
+	$("#results").append(
+		"\n\nResults:\n"+
+		$.map(res,function(v,i){
+			return i +": "+ JSON.stringify(v);
+		}).join("\n")
+	);
+
+});
+
+
+</script></head><body><pre id="info"></pre><pre id="results"></pre><pre id="input" class="hidden">
+</pre></body></html>

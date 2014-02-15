@@ -1,0 +1,53 @@
+<html><head><style type="text/css">
+.hidden { display: none; }
+</style>
+<script type="text/ecmascript" src="/libs/jquery.js"></script>
+<script type="text/ecmascript">
+
+$(function(){
+	var s = $("#input").text().trim().split("\n");
+	var si = [];
+	for(var i=1; i<s.length; i+=2){ si.push(s[i]); }
+
+	
+
+	for(var i=0; i<si[0].length; i++){
+
+	}
+
+	// var str = s[0];
+	// var sub = s[1];
+	// // $("#results").append("Input: "+ str +"\nSub: "+ sub +"\n");
+	// var re = new RegExp(s[1], "gi");
+	// var se = -1;
+	// var ma = [];
+	// var i = 0;
+	// var offset = 0;
+	// while( (se = str.search(re)) != -1 ){
+	// 	ma.push( se + 1 + offset );
+	// 	str = str.substr( se + 1 );
+	// 	offset += se + 1;
+	// }
+
+	$("#results").append("s: "+ JSON.stringify(s, null, " ") +"\n");
+	$("#results").append("si: "+ JSON.stringify(si, null, " ") +"\n");
+
+});
+
+
+</script></head><body><pre id="info"></pre><pre id="results"></pre><pre id="input" class="hidden">
+>Rosalind_1
+ATCCAGCT
+>Rosalind_2
+GGGCAACT
+>Rosalind_3
+ATGGATCT
+>Rosalind_4
+AAGCAACC
+>Rosalind_5
+TTGGAACT
+>Rosalind_6
+ATGCCATT
+>Rosalind_7
+ATGGCACT
+</pre></body></html>
