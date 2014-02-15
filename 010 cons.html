@@ -7,30 +7,36 @@
 $(function(){
 	var s = $("#input").text().trim().split("\n");
 	var si = [];
-	for(var i=1; i<s.length; i+=2){ si.push(s[i]); }
+	for(var i=1; i<s.length; i+=2){ si.push(s[i].split("")); }
 
-	
+	var temp = [];
+	for(var i=0; i<si[0].length; i++){ temp[i]=0; }
+	var profile = { A: temp.slice(), C: temp.slice(), G: temp.slice(), T: temp.slice() }
 
-	for(var i=0; i<si[0].length; i++){
+	$.each(si, function(i,v){
+		$.each(v, function(vi, vv){
+			profile[vv][vi]++;
+		})
+	});
 
+	var cons = si[0].slice();
+
+	for(var i=0; i<cons.length; i++){
+		var k=0;
+		var c="";
+		$.each(profile,function(pi, pv){
+			if(pv[i] > k){
+				k = pv[i];
+				c = pi;
+			}
+		});
+		cons[i] = c;
 	}
 
-	// var str = s[0];
-	// var sub = s[1];
-	// // $("#results").append("Input: "+ str +"\nSub: "+ sub +"\n");
-	// var re = new RegExp(s[1], "gi");
-	// var se = -1;
-	// var ma = [];
-	// var i = 0;
-	// var offset = 0;
-	// while( (se = str.search(re)) != -1 ){
-	// 	ma.push( se + 1 + offset );
-	// 	str = str.substr( se + 1 );
-	// 	offset += se + 1;
-	// }
-
-	$("#results").append("s: "+ JSON.stringify(s, null, " ") +"\n");
-	$("#results").append("si: "+ JSON.stringify(si, null, " ") +"\n");
+	$("#results").append(cons.join("") +"\n");
+	$.map(profile,function(v,i){
+		$("#results").append( i +": "+ v.join(" ") +"\n" );
+	});
 
 });
 
