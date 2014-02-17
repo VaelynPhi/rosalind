@@ -1,19 +1,24 @@
 <html><head><script type="text/ecmascript" src="/libs/jquery.js"></script><script type="text/ecmascript">
 
-var rabbits = [ 1, 1 ];
-
 function generations(n,k){
-	n-=2;
-	while(n--){
-		rabbits.push( 1*rabbits.slice(-1) + 1*( k * rabbits.slice(-2,-1) ) );
+	$("#results").append("Generations: "+ n +"; Mortality: "+ k +"\n" );
+	var g = [ 1 ];
+	var r = [ 1 ];
+	for(var i=1; i<k; i++) r.push(0);
+
+	$("#results").append("0: "+ JSON.stringify( r ) +" / "+ g.slice(-1)[0] +"\n" );
+	for(var i=1; i<n; i++){
+		var born = r.slice(1).reduce(function(previous,current){ return previous + current; },0);
+		for(var j=k-1; j>0; j--) r[j] = r[j-1]; // $("#results").append("\t- "+ j +": "+ JSON.stringify( r ) +"\n" );
+		r[0] = born;
+		g.push( r.reduce(function(previous,current){ return previous + current; },0) );
+		$("#results").append(i +": "+ JSON.stringify( r ) +" / "+ g.slice(-1)[0] +"\n" );
 	}
+	return g.slice(-1)[0];
 }
 
 $(function(){
-	generations(33,4);
-	$("#results").html( rabbits.join(" ") );
-//	var res = seq.split("").sort();
-//	$("#results").html(res);
+	$("#results").append("Results: "+ generations(91,20) +"\n");
 });
 
 
