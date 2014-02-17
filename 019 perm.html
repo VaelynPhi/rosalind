@@ -21,17 +21,15 @@ function permute(u){
 
 $(function(){
 
-	// var l = 3;
-	// var i=0;
-	var g = [1,2,3,4];
-	// while(i++<l){
-	// 	g.push(i);
-	// }
+	var l = 6;
+	var i=0;
+	var g = [];
+	while(i++<l) g.push(i);
 	var res = permute(g); //, "#results");
 	$("#results").append(
-		"\n\nResults:\n"+
+		res.length +"\n",
 		$.map(res,function(v,i){
-			return i +": "+ JSON.stringify(v);
+			return v.join(" ");
 		}).join("\n")
 	);
 
