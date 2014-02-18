@@ -1,0 +1,17 @@
+<html><head><script type="text/ecmascript" src="/libs/jquery.js"></script><script type="text/ecmascript">
+
+function hasDominant(p){
+	var domp = [ 1,1,1,.75,.5,0];
+	var dp = 0;
+	for(var i=0; i<domp.length; i++){
+		dp += 2*p[i]*domp[i];
+	}
+	return dp;
+}
+
+$(function(){
+	$("#results").append(hasDominant([ 17535, 18837, 19660, 17931, 17510, 18938 ]) +"\n" );
+});
+
+
+</script></head><body><pre id="results"></pre></body></html>
