@@ -4,31 +4,35 @@
 <script type="text/ecmascript" src="/libs/jquery.js"></script>
 <script type="text/ecmascript">
 
+function substrings(str){
+	var sub = [];
+	var j = str.length;
+	// sub.push(si[k]);
+
+	// $("#results").append("\t"+ j +"\n");
+	while(j-->1){
+		$("#results").append("\t"+ j +"\n");
+	}
+	return sub;
+}
+
 $(function(){
 	var s = $("#input").text().trim().split(">");
-	var si = [];
+	s.shift();
+	var k = 0;
 	$.each(s,function(i,v){ if(v=="") return;
 		v = v.split("\n");
 		v.shift();
-		si.push(v.join(""));
-
+		s[i] = v = v.join("");
+		if(s[i].length < s[k].length) k=i;
 	});
 
-	$("#results").append( JSON.stringify(si, null, " ") +"\n");
+	$("#results").append( JSON.stringify(s, null, " ") +"\n");
 
-	var k = 0;
-	$.each(si,function(i,v){
-		if(v.length < si[k]) k=i;
-	});
+	var sub = substrings(s[k]);
 
-	var sub = [];
+	$("#results").append( JSON.stringify(sub, null, " ") +"\n");
 
-	sub.push(si[k]);
-
-	var j = si[k].length;
-	while(j--){
-		
-	}
 
 	// $("#results").append( JSON.stringify(si, null, " ") +"\n");
 
