@@ -5,16 +5,31 @@
 <script type="text/ecmascript">
 
 function substrings(str){
+	var unique = {};
 	var sub = [];
 	var j = str.length;
-	// sub.push(si[k]);
-
-	// $("#results").append("\t"+ j +"\n");
-	while(j-->1){
-		$("#results").append("\t"+ j +"\n");
+	for(var l=1; l<j; l++){
+		var limit = j-l+1;
+		for(var m=0; m<limit; m++){
+			var ss = str.substr(m,l);
+			if(typeof(unique[ss])=="undefined"){
+				unique[ss] = 0;
+				sub.push(ss);
+			}
+		}
 	}
-	return sub;
+	sub.push(str);
+	return sub.reverse();
 }
+
+function findLongestCommonSubstring(stringList,substringList){
+	return substringList.find(function(subStringItem){
+		return stringList.reduce(function(previousValue, stringItem){
+			return previousValue && (!!stringItem.match(subStringItem));
+		}, true);
+	});
+}
+
 
 $(function(){
 	var s = $("#input").text().trim().split(">");
@@ -27,29 +42,7 @@ $(function(){
 		if(s[i].length < s[k].length) k=i;
 	});
 
-	$("#results").append( JSON.stringify(s, null, " ") +"\n");
-
-	var sub = substrings(s[k]);
-
-	$("#results").append( JSON.stringify(sub, null, " ") +"\n");
-
-
-	// $("#results").append( JSON.stringify(si, null, " ") +"\n");
-
-	// var o = 3;
-
-	// var graph = $.map(si,function(v,i,list){
-	// 	var suf = v.substr(-o);
-	// 	// $("#results").append(i +": "+ v +" / "+ suf +"\n");
-	// 	return $.map(list,function(lv,li){ if(i==li) return;
-	// 		var pre = lv.substr(0,o);
-	// 		// $("#results").append("\t"+ li +": "+ lv +" / "+ pre +"\n");
-	// 		// if(pre==suf) $("#results").append("+ "+ i +" "+ li +"\n")
-	// 		if(pre==suf) return i +" "+ li;
-	// 	});
-	// }, si);
-
-	// $("#results").append(graph.join("\n") +"\n");
+	$("#results").append( findLongestCommonSubstring(s,substrings(s[k])) +"\n");
 
 });
 
